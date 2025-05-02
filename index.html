@@ -6,17 +6,16 @@
     <title>❤️For You</title>
     <style>
         body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #e5ddd5;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Changed from center to flex-start */
-    overflow: hidden;
-    position: relative;
-    padding-top: 40px; /* Optional: Add space from top */
-}
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #e5ddd5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }.   changing on this line
 
         .chat-container {
             width: 300px;
@@ -489,7 +488,7 @@ function stopConfetti() {
                             chat.appendChild(messageDiv);
                             chat.scrollTop = chat.scrollHeight;
                             
-                            if (text.includes("Love you")) {
+                            if (text.includes("Like you")) {
                                 playLoveSound();
                                 triggerConfetti();
                             } else {
@@ -509,7 +508,7 @@ function stopConfetti() {
                 addMessage("About us...", true, 14000, true);
                 addMessage("What about us? 👀", false, 17000);
                 addMessage("I just wanted to say...", true, 19000, true);
-                addMessage("Love you <span class='heart'>❤️</span>", true, 22000);
+                addMessage("I Like you <span class='heart'>❤️</span>", true, 22000);
             }
         });
     </script>
