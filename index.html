@@ -243,7 +243,7 @@ body {
     
     <div id="startScreen">
         <div class="password-container">
-            <p>Enter our special date (DDMM):</p>
+            <p>Enter your Birth Year (YYYY):</p>
             <input type="password" id="passwordInput" maxlength="4" pattern="\d{4}">
             <button id="startButton">Unlock Our Chat ❤️</button>
         </div>
@@ -251,7 +251,7 @@ body {
 
     <div class="chat-container" style="display: none;">
         <div class="chat-header">
-            WhatsApp 💚
+            R.WhatsApp 💚
         </div>
         <div class="chat-messages" id="chat">
             <!-- Messages will appear here automatically -->
@@ -444,7 +444,7 @@ function stopConfetti() {
             
             // Password protection
             startButton.addEventListener('click', function() {
-                if (passwordInput.value === '0811') { // Change this to your special date
+                if (passwordInput.value === '2005') { // Change this to your special date
                     initAudio();
                     startScreen.style.display = 'none';
                     chatContainer.style.display = 'block';
