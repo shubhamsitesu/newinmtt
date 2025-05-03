@@ -16,6 +16,9 @@
             overflow: hidden;
             position: relative;
         }
+        body {
+    transition: opacity 1s ease !important;
+        }
 
         .chat-container {
             width: 300px;
@@ -317,7 +320,7 @@ body {
             }, 2000);
         }
 
-        function triggerConfetti() {
+                function triggerConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -326,7 +329,7 @@ body {
     const pieces = [];
     const colors = ['#ff0000', '#ff1493', '#ff69b4', '#ffc0cb', '#ffffff'];
     const flowers = ['🌸', '🌹', '🌺', '🌻', '🌼', '🌷', '💐'];
-    
+
     // Create both shapes and flowers
     for (let i = 0; i < 300; i++) {
         const isFlower = Math.random() > 0.7; // 30% chance to be a flower
@@ -340,18 +343,27 @@ body {
             rotation: Math.random() * 0.2 - 0.1,
             isFlower: isFlower,
             flower: isFlower ? flowers[Math.floor(Math.random() * flowers.length)] : null,
-            shape: isFlower ? null : Math.random() > 0.5 ? 'circle' : 'rect' // 50/50 circles and rectangles
+            shape: isFlower ? null : Math.random() > 0.5 ? 'circle' : 'rect'
         });
     }
-    
+
+    let animationComplete = false;
+    const animationDuration = 30000; // 30 seconds total animation time
+    const startTime = Date.now();
+
     function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = elapsed / animationDuration;
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         let stillAlive = false;
         pieces.forEach(p => {
-            p.x += Math.sin(p.angle) * 0.5;
-            p.y += p.speed;
-            p.angle += p.rotation;
+            // Slow down animation as it progresses
+            const speedMultiplier = 1 - (progress * 0.9); // Gradually reduce to 10% speed
+            p.x += Math.sin(p.angle) * 0.5 * speedMultiplier;
+            p.y += p.speed * speedMultiplier;
+            p.angle += p.rotation * speedMultiplier;
             
             if (p.y < canvas.height) {
                 stillAlive = true;
@@ -360,20 +372,18 @@ body {
                 ctx.rotate(p.angle);
                 
                 if (p.isFlower) {
-                    // Draw flower emoji
                     ctx.font = `${p.size}px Arial`;
                     ctx.fillText(p.flower, -p.size/2, p.size/2);
                 } else {
-                    // Draw geometric shapes
                     ctx.fillStyle = p.color;
                     if (p.shape === 'circle') {
                         ctx.beginPath();
                         ctx.arc(0, 0, p.size/2, 0, Math.PI*2);
                         ctx.fill();
                     } else {
-                        // Rectangle with rounded corners
                         const cornerRadius = p.size/5;
                         ctx.beginPath();
+                        // Draw rounded rectangle
                         ctx.moveTo(-p.size/2 + cornerRadius, -p.size/2);
                         ctx.lineTo(p.size/2 - cornerRadius, -p.size/2);
                         ctx.quadraticCurveTo(p.size/2, -p.size/2, p.size/2, -p.size/2 + cornerRadius);
@@ -387,19 +397,24 @@ body {
                         ctx.fill();
                     }
                 }
-                
                 ctx.restore();
             }
         });
-        
-        if (stillAlive) {
+
+        if (stillAlive && elapsed < animationDuration) {
             requestAnimationFrame(animate);
-        } else {
-            // Reset canvas when animation completes
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        } else if (!animationComplete) {
+            animationComplete = true;
+            // Fade out effect
+            document.body.style.transition = 'opacity 1s ease';
+            document.body.style.opacity = '0';
+            // Return to password screen after fade
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }
     }
-    
+
     animate();
 }
 function stopConfetti() {
@@ -501,7 +516,7 @@ function stopConfetti() {
                 // Chat sequence
                 addMessage("Hii <span class='heart'>❤️</span>", true, 1000);
                 addMessage("Hey! What's up?", false, 2500);
-                addMessage("Can I tell you something important?", true, 4000, true);
+                addMessage("Can I tell you something?", true, 4000, true);
                 addMessage("Of course! Tell me 😊", false, 7000);
                 addMessage("I've been thinking a lot lately...", true, 9000, true);
                 addMessage("About what?", false, 12000);
