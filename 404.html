@@ -17,7 +17,7 @@
             position: relative;
         }
         body {
-    transition: opacity 1s ease !important;
+            transition: opacity 1s ease !important;
         }
          
         .chat-container {
@@ -108,30 +108,16 @@
             100% { transform: scale(1); }
         }
 
-        /* Heart creation animation */
         .floating-heart {
             position: absolute;
             pointer-events: none;
             font-size: 20px;
-            animation: float-up 2s ease-out forwards;
+            animation: float-up 2.5s ease-out forwards;
         }
 
         @keyframes float-up {
             0% { transform: translateY(0) scale(1); opacity: 1; }
             100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
-        }
-        .floating-heart {
-    animation: float-up 2.5s ease-out forwards; /* Changed from 2s to 2.5s */
-}
-        /* Confetti canvas */
-        #confetti-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
         }
 
         /* Start screen */
@@ -141,12 +127,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: linear-gradient(135deg, #075e54 0%, #128C7E 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 200;
             flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10px 10px, rgba(255,255,255,0.1) 1px, transparent 0),
+                radial-gradient(circle at 30px 30px, rgba(255,255,255,0.1) 1px, transparent 0);
+            background-size: 40px 40px;
         }
 
         #startButton {
@@ -165,7 +155,7 @@
             background: #128C7E;
         }
 
-        /* Updated Romantic Password Input Styles */
+        /* Password container */
         .password-container {
             background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
             padding: 30px;
@@ -175,6 +165,7 @@
             border: 2px solid #ff6b88;
             width: 80%;
             max-width: 300px;
+            animation: gentlePulse 3s infinite;
         }
 
         .password-container p {
@@ -210,40 +201,81 @@
             letter-spacing: normal;
         }
 
-        /* Heart pulse animation on the container */
-        .password-container {
-            animation: gentlePulse 3s infinite;
-        }
-
         @keyframes gentlePulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
-        /* Romantic WhatsApp-themed start screen */
-#startScreen {
-    background: linear-gradient(135deg, #075e54 0%, #128C7E 100%);
-    /* Subtle dot pattern overlay */
-    background-image: 
-        radial-gradient(circle at 10px 10px, rgba(255,255,255,0.1) 1px, transparent 0),
-        radial-gradient(circle at 30px 30px, rgba(255,255,255,0.1) 1px, transparent 0);
-    background-size: 40px 40px;
-}
-body {
-  animation: bgChange 30s infinite alternate;
-}
 
-@keyframes bgChange {
-  0% { background-color: #ffebee; } /* Romantic pink */
-  33% { background-color: #f3e5f5; } /* Light purple */
-  66% { background-color: #e8f5e9; } /* Soft green */
-  100% { background-color: #e0f7fa; } /* Light blue */
-}
+        body {
+            animation: bgChange 30s infinite alternate;
+        }
+
+        @keyframes bgChange {
+            0% { background-color: #ffebee; }
+            33% { background-color: #f3e5f5; }
+            66% { background-color: #e8f5e9; }
+            100% { background-color: #e0f7fa; }
+        }
+
+        /* Flower message styles */
+        .flower-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            pointer-events: none;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .flower-word {
+            display: flex;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .flower {
+            font-size: 50px;
+            margin: 0 15px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .flower-heart {
+            color: red;
+            font-size: 70px;
+            animation: pulse 1.5s infinite, float 3s ease-in-out infinite;
+        }
+        
+        .flower-petal {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: fall 5s linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                top: 100%;
+                opacity: 0;
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
-    <canvas id="confetti-canvas"></canvas>
-    
     <div id="startScreen">
         <div class="password-container">
             <p>Enter Your Birth Year (YYYY):</p>
@@ -320,111 +352,83 @@ body {
             }, 2000);
         }
 
-        function triggerConfetti() {
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const pieces = [];
-    const colors = ['#ff0000', '#ff1493', '#ff69b4', '#ffc0cb', '#ffffff'];
-   const flowers = ['🌹', '🌹', '🌷', '🌹', '🌹', '💐'];
-
-    // Create both shapes and flowers
-    for (let i = 0; i < 300; i++) {
-        const isFlower = Math.random() > 0.6; // 40% chance to be a flower
-        pieces.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height - canvas.height,
-            size: Math.random() * 12 + 8,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            speed: Math.random() * 3 + 2,
-            angle: Math.random() * 6.28,
-            rotation: Math.random() * 0.2 - 0.1,
-            isFlower: isFlower,
-            flower: isFlower ? flowers[Math.floor(Math.random() * flowers.length)] : null,
-            shape: isFlower ? null : Math.random() > 0.5 ? 'circle' : 'rect'
-        });
-    }
-
-    let animationComplete = false;
-    const animationDuration = 30000; // 30 seconds total animation time
-    const startTime = Date.now();
-
-    function animate() {
-        const elapsed = Date.now() - startTime;
-        const progress = elapsed / animationDuration;
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        let stillAlive = false;
-        pieces.forEach(p => {
-            // Slow down animation as it progresses
-            const speedMultiplier = 1 - (progress * 0.9); // Gradually reduce to 10% speed
-            p.x += Math.sin(p.angle) * 0.5 * speedMultiplier;
-            p.y += p.speed * speedMultiplier;
-            p.angle += p.rotation * speedMultiplier;
+        function showFlowerMessage() {
+            const flowers = {
+                "I": ["🌼", "🌸", "🌺"],
+                "LOVE": ["❤️"],
+                "YOU": ["🌹", "🌷", "💐"]
+            };
             
-            if (p.y < canvas.height) {
-                stillAlive = true;
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.angle);
-                
-                if (p.isFlower) {
-                    ctx.font = `${p.size}px Arial`;
-                    ctx.fillText(p.flower, -p.size/2, p.size/2);
-                } else {
-                    ctx.fillStyle = p.color;
-                    if (p.shape === 'circle') {
-                        ctx.beginPath();
-                        ctx.arc(0, 0, p.size/2, 0, Math.PI*2);
-                        ctx.fill();
-                    } else {
-                        const cornerRadius = p.size/5;
-                        ctx.beginPath();
-                        // Draw rounded rectangle
-                        ctx.moveTo(-p.size/2 + cornerRadius, -p.size/2);
-                        ctx.lineTo(p.size/2 - cornerRadius, -p.size/2);
-                        ctx.quadraticCurveTo(p.size/2, -p.size/2, p.size/2, -p.size/2 + cornerRadius);
-                        ctx.lineTo(p.size/2, p.size/2 - cornerRadius);
-                        ctx.quadraticCurveTo(p.size/2, p.size/2, p.size/2 - cornerRadius, p.size/2);
-                        ctx.lineTo(-p.size/2 + cornerRadius, p.size/2);
-                        ctx.quadraticCurveTo(-p.size/2, p.size/2, -p.size/2, p.size/2 - cornerRadius);
-                        ctx.lineTo(-p.size/2, -p.size/2 + cornerRadius);
-                        ctx.quadraticCurveTo(-p.size/2, -p.size/2, -p.size/2 + cornerRadius, -p.size/2);
-                        ctx.closePath();
-                        ctx.fill();
-                    }
+            const container = document.createElement('div');
+            container.className = 'flower-message';
+            document.body.appendChild(container);
+            
+            // Create each word with flowers
+            Object.entries(flowers).forEach(([word, flowerTypes], wordIndex) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'flower-word';
+                container.appendChild(wordDiv);
+              
+                // For "LOVE" we just show the heart
+                if (word === "LOVE") {
+                    const heart = document.createElement('div');
+                    heart.className = 'flower-heart';
+                    heart.innerHTML = flowerTypes[0];
+                    wordDiv.appendChild(heart);
+                } 
+                // For other words, show flowers for each letter
+                else {
+                    word.split('').forEach((letter, letterIndex) => {
+                        const flower = document.createElement('div');
+                        flower.className = 'flower';
+                        const randomFlower = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+                        flower.innerHTML = randomFlower;
+                        wordDiv.appendChild(flower);
+                        
+                        // Create falling petals
+                        for (let i = 0; i < 5; i++) {
+                            setTimeout(() => {
+                                const petal = document.createElement('div');
+                                petal.className = 'flower-petal';
+                                petal.innerHTML = randomFlower;
+                                petal.style.left = `${letterIndex * 40 + Math.random() * 30}px`;
+                                petal.style.top = `-20px`;
+                                petal.style.animationDelay = `${i * 0.5}s`;
+                                petal.style.fontSize = `${15 + Math.random() * 15}px`;
+                                wordDiv.appendChild(petal);
+                                
+                                setTimeout(() => {
+                                    petal.remove();
+                                }, 5000);
+                            }, i * 500);
+                        }
+                    });
                 }
-                ctx.restore();
-            }
-        });
-
-        if (stillAlive && elapsed < animationDuration) {
-            requestAnimationFrame(animate);
-        } else if (!animationComplete) {
-            animationComplete = true;
-            // Fade out effect
-            document.body.style.transition = 'opacity 1s ease';
-            document.body.style.opacity = '0';
-            // Return to password screen after fade
+                
+                // Animate word in
+                setTimeout(() => {
+                    wordDiv.style.transition = 'all 1s ease-out';
+                    wordDiv.style.opacity = '1';
+                    wordDiv.style.transform = 'translateY(0)';
+                    
+                    // Add gentle floating animation
+                    setInterval(() => {
+                        wordDiv.style.transform = `translateY(${Math.sin(Date.now()/1000 + wordIndex) * 10}px)`;
+                    }, 50);
+                }, wordIndex * 500);
+            });
+            
+            // Remove after some time
             setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+                container.style.transition = 'opacity 2s';
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.remove();
+                }, 2000);
+            }, 8000);
         }
-    }
 
-    animate();
- }
-function stopConfetti() {
-    confettiActive = false;
-    continuousParticles = [];
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-        // Swipe detection setup
+         // Swipe detection setup
         let startX;
         const chatContainer = document.querySelector('.chat-container');
         if (chatContainer) {
@@ -475,7 +479,6 @@ function stopConfetti() {
                     startButton.click();
                 }
             });
-            
             function startChat() {
                 function addMessage(text, isReceived, delay, withTyping = false) {
                     setTimeout(() => {
@@ -505,14 +508,15 @@ function stopConfetti() {
                             
                             if (text.includes("LOVE you")) {
                                 playLoveSound();
-                                triggerConfetti();
+                                showFlowerMessage();
                             } else {
                                 playMessageSound();
                             }
                         }
                     }, delay);
                 }
-                 // Chat sequence
+                
+                // Chat sequence
                 addMessage("Hii <span class='heart'>❤️</span>", true, 1000);
                 addMessage("Hello", false, 2500);
                 addMessage("Suno na, ek baat kehni thi...?", true, 4000, true);
@@ -523,10 +527,8 @@ function stopConfetti() {
                 addMessage("Hamare baare mein kya? 👀", false, 17000);
                 addMessage("Bas ye kahna tha ki...", true, 19000, true);
                 addMessage("I LOVE you <span class='heart'>❤️</span>", true, 22000);
-               
             }
         });
     </script>
 </body>
 </html>
-
