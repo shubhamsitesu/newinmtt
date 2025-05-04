@@ -19,7 +19,7 @@
         body {
     transition: opacity 1s ease !important;
         }
-
+         
         .chat-container {
             width: 300px;
             height: 500px;
@@ -248,7 +248,7 @@ body {
         <div class="password-container">
             <p>Enter Your Birth Year (YYYY):</p>
             <input type="password" id="passwordInput" maxlength="4" pattern="\d{4}">
-            <button id="startButton">Unlock Your Chat ❤️</button>
+            <button id="startButton">Unlock Our Chat ❤️</button>
         </div>
     </div>
 
@@ -320,7 +320,7 @@ body {
             }, 2000);
         }
 
-                function triggerConfetti() {
+        function triggerConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -416,7 +416,7 @@ body {
     }
 
     animate();
-}
+ }
 function stopConfetti() {
     confettiActive = false;
     continuousParticles = [];
@@ -503,7 +503,7 @@ function stopConfetti() {
                             chat.appendChild(messageDiv);
                             chat.scrollTop = chat.scrollHeight;
                             
-                            if (text.includes("Like you")) {
+                            if (text.includes("LOVE you")) {
                                 playLoveSound();
                                 triggerConfetti();
                             } else {
@@ -512,20 +512,21 @@ function stopConfetti() {
                         }
                     }, delay);
                 }
-
-                // Chat sequence
+                 // Chat sequence
                 addMessage("Hii <span class='heart'>❤️</span>", true, 1000);
-                addMessage("Hey! What's up?", false, 2500);
-                addMessage("Can I tell you something?", true, 4000, true);
-                addMessage("Of course! Tell me 😊", false, 7000);
-                addMessage("I've been thinking a lot lately...", true, 9000, true);
-                addMessage("About what?", false, 12000);
-                addMessage("About us...", true, 14000, true);
-                addMessage("What about us? 👀", false, 17000);
-                addMessage("I just wanted to say...", true, 19000, true);
-                addMessage("I Like you <span class='heart'>❤️</span>", true, 22000);
+                addMessage("Hello", false, 2500);
+                addMessage("Suno na, ek baat kehni thi...?", true, 4000, true);
+                addMessage("Ha bolo 😊", false, 7000);
+                addMessage("Aajkal bas tumhare baare mein sochta hu", true, 9000, true);
+                addMessage("kya?", false, 12000);
+                addMessage("Hamare bare mein...", true, 14000, true);
+                addMessage("Hamare baare mein kya? 👀", false, 17000);
+                addMessage("Bas ye kahna tha ki...", true, 19000, true);
+                addMessage("I LOVE you <span class='heart'>❤️</span>", true, 22000);
+               
             }
         });
     </script>
 </body>
 </html>
+
