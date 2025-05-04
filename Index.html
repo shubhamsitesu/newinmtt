@@ -464,24 +464,35 @@
                 }
             });
             
-            // Password protection
-            startButton.addEventListener('click', function() {
-                if (passwordInput.value === '2005') { // Change this to your special date
-                    initAudio();
-                    startScreen.style.display = 'none';
-                    chatContainer.style.display = 'block';
-                    startChat();
-                } else {
-                    alert('Try again ❤️');
-                }
-            });
-            
-            // Allow pressing Enter in password field
-            passwordInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    startButton.click();
-                }
-            });
+            <!-- CryptoJS library (MD5) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+    (function(){
+        const _0x1a2f = '29c3eea3f305d6b823f562ac4be35217'; // hashed '2005'
+        const _hashFn = window['CryptoJS']['MD5'];
+        const _get = el => document.querySelector(el);
+
+        _get('#startButton').addEventListener('click', function() {
+            const input = _get('#passwordInput').value;
+            const inputHash = _hashFn(input).toString();
+            if (inputHash === _0x1a2f) {
+                initAudio();
+                _get('#startScreen').style.display = 'none';
+                _get('#chatContainer').style.display = 'block';
+                startChat();
+            } else {
+                alert('Try again ❤️');
+            }
+        });
+
+        _get('#passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                _get('#startButton').click();
+            }
+        });
+    })();
+</script>
             
             function startChat() {
                 // Clear any previous messages
