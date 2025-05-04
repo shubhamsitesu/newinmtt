@@ -354,9 +354,9 @@
 
         function showFlowerMessage() {
             const flowers = {
-                "I": ["😘", "👩‍❤️‍💋‍👨"],
-                "LOVE": ["❤️", "💞"],
-                "YOU": ["🌹", "🥀",]
+                "I": ["🌼", "🌸", "🌺"],
+                "LOVE": ["❤️"],
+                "YOU": ["🌹", "🌷", "💐"]
             };
             
             const container = document.createElement('div');
@@ -368,7 +368,7 @@
                 const wordDiv = document.createElement('div');
                 wordDiv.className = 'flower-word';
                 container.appendChild(wordDiv);
-              
+                
                 // For "LOVE" we just show the heart
                 if (word === "LOVE") {
                     const heart = document.createElement('div');
@@ -391,7 +391,7 @@
                                 const petal = document.createElement('div');
                                 petal.className = 'flower-petal';
                                 petal.innerHTML = randomFlower;
-                                petal.style.left = `${letterIndex * 40 + Math.random() * 30}px`;
+                                petal.style.left = `${letterIndex * 60 + Math.random() * 40}px`;
                                 petal.style.top = `-20px`;
                                 petal.style.animationDelay = `${i * 0.5}s`;
                                 petal.style.fontSize = `${15 + Math.random() * 15}px`;
@@ -418,17 +418,20 @@
                 }, wordIndex * 500);
             });
             
-            // Remove after some time
+            // Remove after some time and return to password screen
             setTimeout(() => {
-                container.style.transition = 'opacity 2s';
+                container.style.transition = 'opacity 1s';
                 container.style.opacity = '0';
                 setTimeout(() => {
                     container.remove();
-                }, 2000);
+                    document.querySelector('.chat-container').style.display = 'none';
+                    document.getElementById('startScreen').style.display = 'flex';
+                    document.getElementById('passwordInput').value = '';
+                }, 1000);
             }, 8000);
         }
 
-         // Swipe detection setup
+        // Swipe detection setup
         let startX;
         const chatContainer = document.querySelector('.chat-container');
         if (chatContainer) {
@@ -479,7 +482,11 @@
                     startButton.click();
                 }
             });
+            
             function startChat() {
+                // Clear any previous messages
+                chat.innerHTML = '';
+                
                 function addMessage(text, isReceived, delay, withTyping = false) {
                     setTimeout(() => {
                         if (withTyping) {
