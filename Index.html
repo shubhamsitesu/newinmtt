@@ -328,11 +328,11 @@ body {
     
     const pieces = [];
     const colors = ['#ff0000', '#ff1493', '#ff69b4', '#ffc0cb', '#ffffff'];
-    const flowers = ['🌸', '🌹', '🌺', '🌻', '🌷', '🌼', '🌷', '💐'];
+    const flowers = ['🌹', '🌹', '🌷', '🌹', '🌹', '💐'];
 
     // Create both shapes and flowers
     for (let i = 0; i < 300; i++) {
-        const isFlower = Math.random() > 0.4; // 60% chance to be a flower
+        const isFlower = Math.random() > 0.6; // 40% chance to be a flower
         pieces.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height - canvas.height,
