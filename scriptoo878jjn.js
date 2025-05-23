@@ -224,7 +224,7 @@
             
             // Password protection
             startButton.addEventListener('click', function() {
-                if (passwordInput.value === '08112005') {
+                if (passwordInput.value === '2005') {
                     initAudio();
                     startScreen.style.display = 'none';
                     chatContainer.style.display = 'block';
@@ -388,17 +388,18 @@
                     chat.scrollTop = chat.scrollHeight;
                 }
 
-                // Initial chat sequence
-                addMessage("Hii my love <span class='heart'>❤️</span>", true, 1000);
-                addMessage("Hello beautiful 😊", false, 2500);
-                addMessage("I've been thinking about you...", true, 4000, true);
-                addMessage("What's on your mind? 💭", false, 7000);
-                addMessage("How every moment with you feels magical ✨", true, 9000, true);
-                addMessage("You make my heart skip a beat 💓", false, 12000);
-                addMessage("I want to hold you close...", true, 14000, true);
-                addMessage("I love you more than words can say 💌", false, 17000);
-                addMessage("Will you be mine forever?", true, 19000, true);
-                addMessage("Forever and always <span class='heart'>❤️</span>", true, 22000);
-                addMessage("I love you <span class='heart'>❤️</span>", true, 23000);
+                // Initial chat sequence in romantic Hinglish (true = boy, false = girl)
+addMessage("Hii meri jaan <span class='heart'>❤️</span>", true, 1000);
+addMessage("Hello mere handsome 😊", false, 2500);
+addMessage("Bas aapke baare mein soch raha tha...", true, 4000, true);
+addMessage("Kya chal raha hai aapke dil mein? 💭", false, 7000);
+addMessage("Aapke saath har pal kisi jaadu se kam nahi lagta ✨", true, 9000, true);
+addMessage("Aap mera dil dhadakne pe majboor kar dete ho 💓", false, 12000);
+addMessage("Bas aapko apni baahon mein lena chahta hoon...", true, 14000, true);
+addMessage("Main aapse itna pyaar karta hoon jitna lafzon mein bayan nahi ho sakta 💌", false, 17000);
+addMessage("Kya aap hamesha ke liye meri banengi?", true, 19000, true);
+addMessage("Haan... hamesha aur sirf aapki <span class='heart'>❤️</span>", false, 22000);
+addMessage("Main aapse dil se pyaar karta hoon <span class='heart'>❤️</span>", true, 23000);
+
             }
         });
