@@ -224,7 +224,7 @@
             
             // Password protection
             startButton.addEventListener('click', function() {
-                if (passwordInput.value === '2005') {
+                if (passwordInput.value === '08112005') {
                     initAudio();
                     startScreen.style.display = 'none';
                     chatContainer.style.display = 'block';
