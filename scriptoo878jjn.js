@@ -399,7 +399,7 @@ addMessage("Bas aapko apni baahon mein lena chahta hoon...", true, 14000, true);
 addMessage("Main aapse itna pyaar karta hoon jitna lafzon mein bayan nahi ho sakta 💌", false, 17000);
 addMessage("Kya aap hamesha ke liye meri banengi?", true, 19000, true);
 addMessage("Haan... hamesha aur sirf aapki <span class='heart'>❤️</span>", false, 22000);
-addMessage("Main aapse dil se pyaar karta hoon <span class='heart'>❤️</span>", true, 23000);
+addMessage("I love you <span class='heart'>❤️</span>", true, 23000);
 
             }
         });
